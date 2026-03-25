@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Géraud Morin — Commercial BtoB · NED Grand Est</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sol:        #F5A623;
+    --sol-deep:   #C8841A;
+    --sol-light:  #FDE8B8;
+    --sol-pale:   #FEF6E4;
+    --anthracite: #1A1A1A;
+    --gris-fonce: #2C2C2C;
+    --gris:       #6B6B6B;
+    --gris-clair: #F0F0ED;
+    --blanc:      #FFFFFF;
+    --vert:       #2D6A4F;
+    --vert-light: #D8F3DC;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanc);
+    color: var(--anthracite);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(26,26,26,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--sol);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sol); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--anthracite);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  /* Rayons solaires animés */
+  .hero-rays {
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 800px; height: 800px;
+  }
+  .ray {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 50%; height: 1px;
+    transform-origin: left center;
+    background: linear-gradient(to right, rgba(245,166,35,0.18), transparent);
+  }
+  .ray:nth-child(1)  { transform: rotate(0deg); }
+  .ray:nth-child(2)  { transform: rotate(15deg); }
+  .ray:nth-child(3)  { transform: rotate(30deg); }
+  .ray:nth-child(4)  { transform: rotate(45deg); }
+  .ray:nth-child(5)  { transform: rotate(60deg); }
+  .ray:nth-child(6)  { transform: rotate(75deg); }
+  .ray:nth-child(7)  { transform: rotate(90deg); }
+  .ray:nth-child(8)  { transform: rotate(105deg); }
+  .ray:nth-child(9)  { transform: rotate(120deg); }
+  .ray:nth-child(10) { transform: rotate(135deg); }
+  .ray:nth-child(11) { transform: rotate(150deg); }
+  .ray:nth-child(12) { transform: rotate(165deg); }
+  .ray:nth-child(13) { transform: rotate(180deg); }
+  .ray:nth-child(14) { transform: rotate(195deg); }
+  .ray:nth-child(15) { transform: rotate(210deg); }
+  .ray:nth-child(16) { transform: rotate(225deg); }
+  .ray:nth-child(17) { transform: rotate(240deg); }
+  .ray:nth-child(18) { transform: rotate(255deg); }
+  .ray:nth-child(19) { transform: rotate(270deg); }
+  .ray:nth-child(20) { transform: rotate(285deg); }
+  .ray:nth-child(21) { transform: rotate(300deg); }
+  .ray:nth-child(22) { transform: rotate(315deg); }
+  .ray:nth-child(23) { transform: rotate(330deg); }
+  .ray:nth-child(24) { transform: rotate(345deg); }
+
+  .hero-sun {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(245,166,35,0.25) 0%, rgba(245,166,35,0.05) 60%, transparent 80%);
+    border: 1px solid rgba(245,166,35,0.12);
+    animation: sunPulse 6s ease-in-out infinite;
+  }
+  @keyframes sunPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-50%) scale(1.05); opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sol);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    color: var(--blanc);
+    line-height: 1.05;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+  .hero-title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(245,166,35,0.8);
+    font-weight: 300;
+    margin-top: 1rem;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+  .hero-desc {
+    max-width: 540px;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.65s forwards;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s forwards;
+  }
+  .tag {
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(245,166,35,0.3);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,166,35,0.8);
+    background: rgba(245,166,35,0.06);
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    margin-top: 2.5rem;
+    padding: 0.9rem 2rem;
+    background: var(--sol);
+    color: var(--anthracite);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.95s forwards;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(245,166,35,0.4); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 1s ease 1.5s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(245,166,35,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--sol); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--anthracite);
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-lead {
+    max-width: 640px;
+    font-size: 0.98rem; line-height: 1.8;
+    color: var(--gris);
+  }
+
+  /* ── PROFIL ── */
+  #profil { background: var(--blanc); }
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5px;
+    margin-top: 3rem;
+    background: #E8E4DC;
+    border: 1px solid #E8E4DC;
+  }
+  .profil-card {
+    background: var(--blanc);
+    padding: 2.25rem;
+    transition: background 0.2s;
+  }
+  .profil-card:hover { background: var(--sol-pale); }
+  .profil-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-style: italic;
+    color: var(--sol-light);
+    line-height: 1; margin-bottom: 0.75rem;
+  }
+  .profil-card h3 {
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--anthracite); margin-bottom: 1rem;
+  }
+  .profil-card p {
+    font-size: 0.88rem; line-height: 1.75;
+    color: var(--gris);
+  }
+  .profil-card .stat {
+    margin-top: 1.25rem;
+    padding: 0.75rem;
+    background: var(--sol-pale);
+    border-left: 3px solid var(--sol);
+    font-size: 0.82rem; color: var(--gris-fonce);
+  }
+  .profil-card .stat strong {
+    display: block; color: var(--sol-deep);
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.2rem;
+  }
+
+  /* ── MARCHÉ ── */
+  #marche {
+    background: var(--anthracite);
+    position: relative; overflow: hidden;
+  }
+  #marche::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(245,166,35,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,166,35,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  #marche .section-label { color: var(--sol); }
+  #marche .section-title { color: var(--blanc); }
+  #marche .section-lead { color: rgba(255,255,255,0.5); }
+
+  .marche-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    margin-top: 3rem;
+    background: rgba(245,166,35,0.1);
+    position: relative; z-index: 1;
+  }
+  .stat-bloc {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .stat-bloc:hover { background: rgba(245,166,35,0.08); }
+  .stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; color: var(--sol);
+    line-height: 1;
+  }
+  .stat-unit { font-size: 1.2rem; color: rgba(245,166,35,0.6); }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0.5rem;
+  }
+  .stat-sub {
+    font-size: 0.75rem; color: rgba(255,255,255,0.25);
+    margin-top: 0.25rem;
+  }
+
+  .marche-args {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    position: relative; z-index: 1;
+  }
+  .arg-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,166,35,0.15);
+    padding: 2rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .arg-card:hover {
+    border-color: rgba(245,166,35,0.35);
+    background: rgba(255,255,255,0.06);
+  }
+  .arg-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-style: italic;
+    color: rgba(245,166,35,0.12);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .arg-card h3 {
+    font-size: 0.88rem; font-weight: 600;
+    color: rgba(245,166,35,0.9);
+    margin-bottom: 0.75rem;
+  }
+  .arg-card p {
+    font-size: 0.85rem; line-height: 1.75;
+    color: rgba(255,255,255,0.5);
+  }
+  .arg-card .point {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(245,166,35,0.07);
+    border-left: 2px solid var(--sol);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .arg-card .point strong {
+    color: var(--sol); display: block;
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.2rem;
+  }
+
+  /* ── TERRITOIRE ── */
+  #territoire { background: var(--gris-clair); }
+  .territoire-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .dept-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  .dept-table th {
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gris); padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--sol);
+    text-align: left;
+  }
+  .dept-table td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid #E0DDD6;
+    color: var(--gris-fonce);
+    vertical-align: middle;
+  }
+  .dept-table tr:last-child td { border-bottom: none; font-weight: 600; background: var(--sol-pale); }
+  .potentiel {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 600;
+    padding: 2px 8px; letter-spacing: 0.06em;
+  }
+  .p-fort { background: var(--vert-light); color: var(--vert); }
+  .p-moyen { background: #FDE8B8; color: #8B5E00; }
+  .p-dev { background: #E8E4DC; color: #666; }
+
+  .territoire-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: var(--anthracite);
+    margin-bottom: 1rem;
+  }
+  .territoire-text p {
+    font-size: 0.9rem; line-height: 1.8;
+    color: var(--gris); margin-bottom: 1.25rem;
+  }
+  .territoire-text .highlight {
+    background: var(--sol-pale);
+    border-left: 3px solid var(--sol);
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--gris-fonce);
+    font-style: italic;
+  }
+
+  /* ── MÉTHODE ── */
+  #methode { background: var(--blanc); }
+  .methode-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    position: relative;
+  }
+  .methode-steps::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem; left: 16.67%; right: 16.67%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--sol), transparent);
+  }
+  .step {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+  }
+  .step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--sol);
+    color: var(--anthracite);
+    font-weight: 700; font-size: 0.88rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+  .step h3 {
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--anthracite); margin-bottom: 0.75rem;
+  }
+  .step p { font-size: 0.85rem; line-height: 1.7; color: var(--gris); }
+
+  .methode-phrase {
+    margin-top: 3rem;
+    padding: 2rem 2.5rem;
+    background: var(--anthracite);
+    text-align: center;
+  }
+  .methode-phrase p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-style: italic;
+    color: var(--blanc);
+    line-height: 1.5;
+  }
+  .methode-phrase span { color: var(--sol); }
+
+  /* ── PARCOURS ── */
+  #parcours { background: var(--gris-clair); }
+  .parcours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .exp-card {
+    background: var(--blanc);
+    border: 1px solid #E0DDD6;
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .exp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.09);
+  }
+  .exp-card-header {
+    padding: 1.5rem;
+    background: var(--anthracite);
+    display: flex; align-items: flex-start; justify-content: space-between;
+  }
+  .exp-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--blanc);
+    line-height: 1.3;
+  }
+  .exp-badge {
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--anthracite);
+    background: var(--sol);
+    padding: 0.25rem 0.6rem;
+    white-space: nowrap; flex-shrink: 0;
+    margin-left: 1rem;
+  }
+  .exp-card-body { padding: 1.5rem; }
+  .exp-card-body p {
+    font-size: 0.85rem; line-height: 1.75;
+    color: var(--gris); margin-bottom: 1rem;
+  }
+  .exp-result {
+    font-size: 0.82rem; padding: 0.75rem;
+    background: var(--sol-pale);
+    border-left: 2px solid var(--sol);
+  }
+  .exp-result .r { color: var(--sol-deep); font-weight: 600; }
+  .exp-result .v { color: var(--gris); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--anthracite);
+    text-align: center;
+    padding: 6rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center bottom, rgba(245,166,35,0.08) 0%, transparent 65%);
+  }
+  #contact .section-label { color: var(--sol); }
+  #contact .section-title { color: var(--blanc); }
+  #contact .section-lead { color: rgba(255,255,255,0.45); margin: 1rem auto 2.5rem; }
+  .contact-links {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .contact-btn:hover { transform: translateY(-2px); }
+  .contact-btn.primary { background: var(--sol); color: var(--anthracite); }
+  .contact-btn.primary:hover { box-shadow: 0 8px 30px rgba(245,166,35,0.35); }
+  .contact-btn.secondary {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .contact-btn.secondary:hover { background: rgba(255,255,255,0.1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111;
+    border-top: 1px solid rgba(245,166,35,0.1);
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+  footer .footer-ned { color: var(--sol); font-weight: 500; }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .profil-grid { grid-template-columns: 1fr; }
+    .marche-args { grid-template-columns: 1fr; }
+    .territoire-intro { grid-template-columns: 1fr; }
+    .methode-steps { grid-template-columns: 1fr; }
+    .methode-steps::before { display: none; }
+    .hero-content { padding: 0 1.5rem; }
+    .hero-rays, .hero-sun { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">G. Morin — NED Grand Est</div>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#marche">Marché</a></li>
+    <li><a href="#territoire">Territoire</a></li>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-rays">
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+  </div>
+  <div class="hero-sun"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Candidature Commercial BtoB · NED Nouvelle Énergie Distribution</p>
+    <h1 class="hero-name">Géraud<br>Morin</h1>
+    <p class="hero-title">Développeur de territoire · Grand Est · Photovoltaïque BtoB</p>
+    <p class="hero-desc">
+      15+ ans d'expérience commerciale et technique — prospection BtoB à froid, franchise, grands travaux, énergie solaire. Ancré dans le Grand Est, prêt à construire le territoire NED de zéro avec méthode et conviction.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Commercial BtoB</span>
+      <span class="tag">Photovoltaïque</span>
+      <span class="tag">Prospection terrain</span>
+      <span class="tag">Grand Est</span>
+      <span class="tag">Installateurs RGE</span>
+      <span class="tag">Villers-lès-Nancy (54)</span>
+    </div>
+    <a href="#contact" class="hero-cta">Prendre contact →</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <div class="container">
+    <p class="section-label reveal">Pourquoi moi</p>
+    <h2 class="section-title reveal">Un profil taillé<br>pour ce territoire</h2>
+    <p class="section-lead reveal">Trois atouts qui se combinent rarement : la maîtrise technique du PV, l'expérience prouvée de la prospection BtoB à froid, et l'ancrage local dans le Grand Est.</p>
+
+    <div class="profil-grid reveal">
+      <div class="profil-card">
+        <div class="profil-card-num">01</div>
+        <h3>Expertise photovoltaïque</h3>
+        <p>Connaissance directe du secteur : produits, contraintes d'installation, rentabilité des projets, logique métier des installateurs. Capable de parler le même langage dès le premier appel — sans courbe d'apprentissage.</p>
+        <div class="stat">
+          <strong>Avantage terrain</strong>
+          Un installateur fait confiance à quelqu'un qui comprend ses chantiers, pas à un commercial généraliste.
+        </div>
+      </div>
+      <div class="profil-card">
+        <div class="profil-card-num">02</div>
+        <h3>Chasseur BtoB éprouvé</h3>
+        <p>Chez Attila, j'ai construit un portefeuille client de zéro par téléphone. 300 entreprises et artisans prospectés à froid en 2020, 100 signés en fin d'année. Pas de chance — une méthode.</p>
+        <div class="stat">
+          <strong>Taux de conversion</strong>
+          33% — top tiers des agences de moins de 5 ans au classement national Attila.
+        </div>
+      </div>
+      <div class="profil-card">
+        <div class="profil-card-num">03</div>
+        <h3>Ancrage Grand Est</h3>
+        <p>Basé à Villers-lès-Nancy, je connais le tissu économique de la région : PMI, ETI, plateformes logistiques, zones d'activité. Un avantage décisif pour créer la confiance avec les installateurs locaux.</p>
+        <div class="stat">
+          <strong>Position</strong>
+          Premier commercial NED dans la région = position de bâtisseur, pas d'exécutant.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCHÉ -->
+<section id="marche">
+  <div class="container">
+    <p class="section-label reveal">Contexte marché</p>
+    <h2 class="section-title reveal">Un marché en accélération,<br>un territoire à saisir</h2>
+    <p class="section-lead reveal">Les chiffres parlent d'eux-mêmes : le PV BtoB est en plein essor national, et le Grand Est reste sous-équipé en distribution locale.</p>
+
+    <div class="marche-stats reveal">
+      <div class="stat-bloc">
+        <div class="stat-val">+24<span class="stat-unit">%</span></div>
+        <div class="stat-label">Croissance PV France</div>
+        <div class="stat-sub">2024 vs 2023 — record historique</div>
+      </div>
+      <div class="stat-bloc">
+        <div class="stat-val">+35<span class="stat-unit">%</span></div>
+        <div class="stat-label">Segment C&I T3 2025</div>
+        <div class="stat-sub">Commerces & industrie — record trimestriel</div>
+      </div>
+      <div class="stat-bloc">
+        <div class="stat-val">+86<span class="stat-unit">%</span></div>
+        <div class="stat-label">Installations dans le 54</div>
+        <div class="stat-sub">Meurthe-et-Moselle 2024 vs 2023</div>
+      </div>
+      <div class="stat-bloc">
+        <div class="stat-val">~1<span class="stat-unit">400</span></div>
+        <div class="stat-label">Installateurs estimés</div>
+        <div class="stat-sub">Vivier QualiPV sur 13 départements</div>
+      </div>
+    </div>
+
+    <div class="marche-args reveal">
+      <div class="arg-card">
+        <div class="arg-card-num">01</div>
+        <h3>Loi APER — opportunité datée</h3>
+        <p>Les parkings de plus de 10 000 m² doivent être équipés d'ombrières photovoltaïques avant fin 2026. Dans le Grand Est, des dizaines de sites logistiques et commerciaux sont concernés — une demande captive, immédiate, et sans distributeur local pour l'adresser.</p>
+        <div class="point">
+          <strong>Argument terrain</strong>
+          Corridor A4/A31 : entrepôts Amazon, Décathlon, Lidl, GXO — tous dans le périmètre légal.
+        </div>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-num">02</div>
+        <h3>Productivité réelle — idée reçue à déconstruire</h3>
+        <p>L'écart de productivité Grand Est / Sud existe mais reste limité à 20-25%. Strasbourg affiche 1 050 à 1 150 kWh/kWc/an — dans la moyenne française. Et les panneaux sont plus efficaces par temps froid : jusqu'à +10% par journée ensoleillée à 0°C.</p>
+        <div class="point">
+          <strong>Rentabilité installateurs</strong>
+          Retour sur investissement de 11 à 14 ans pour une installation C&I bien dimensionnée dans la région.
+        </div>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-num">03</div>
+        <h3>NED — un groupe solide derrière</h3>
+        <p>NED Nouvelle Énergie Distribution s'appuie sur le groupe <strong style="color:var(--sol)">Téréva</strong>, filiale de Saint-Gobain Distribution Bâtiment France, et sur <strong style="color:var(--sol)">Mabéo Industries</strong>. Une logistique nationale rodée, des prix de gros compétitifs, une solidité financière rassurante pour les installateurs partenaires.</p>
+        <div class="point">
+          <strong>Argument installateurs</strong>
+          Travailler avec NED c'est accéder aux prix et à la logistique d'un groupe national, avec la relation d'un commercial local dédié.
+        </div>
+      </div>
+      <div class="arg-card">
+        <div class="arg-card-num">04</div>
+        <h3>Tissu industriel dense</h3>
+        <p>Alsace, Moselle, Marne, Meurthe-et-Moselle : PMI, ETI, plateformes logistiques, bâtiments agricoles en Champagne. Des toitures et des parkings partout — exactement la cible BtoB C&I où NED peut créer de la valeur rapidement.</p>
+        <div class="point">
+          <strong>Cap à l'Est</strong>
+          Association filière PV Grand Est active depuis 2025 — réseau professionnel local à activer dès la prise de poste.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITOIRE -->
+<section id="territoire">
+  <div class="container">
+    <p class="section-label reveal">Cartographie</p>
+    <h2 class="section-title reveal">Le territoire en chiffres</h2>
+    <p class="section-lead reveal">Estimation du vivier d'installateurs QualiPV par département, basée sur les données ADEME/RGE 2025. Une base de prospection structurée dès le premier jour.</p>
+
+    <div class="territoire-intro reveal">
+      <div>
+        <table class="dept-table">
+          <thead>
+            <tr>
+              <th>Dept.</th>
+              <th>Territoire</th>
+              <th>Est. QualiPV</th>
+              <th>Potentiel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>67</td><td>Bas-Rhin</td><td>180 – 240</td>
+              <td><span class="potentiel p-fort">Fort</span></td>
+            </tr>
+            <tr>
+              <td>68</td><td>Haut-Rhin</td><td>150 – 210</td>
+              <td><span class="potentiel p-fort">Fort</span></td>
+            </tr>
+            <tr>
+              <td>57</td><td>Moselle</td><td>160 – 220</td>
+              <td><span class="potentiel p-fort">Fort</span></td>
+            </tr>
+            <tr>
+              <td>54</td><td>Meurthe-et-Moselle</td><td>110 – 150</td>
+              <td><span class="potentiel p-fort">Fort</span></td>
+            </tr>
+            <tr>
+              <td>51</td><td>Marne</td><td>90 – 130</td>
+              <td><span class="potentiel p-moyen">Moyen</span></td>
+            </tr>
+            <tr>
+              <td>10</td><td>Aube</td><td>70 – 95</td>
+              <td><span class="potentiel p-moyen">Moyen</span></td>
+            </tr>
+            <tr>
+              <td>88</td><td>Vosges</td><td>60 – 85</td>
+              <td><span class="potentiel p-moyen">Moyen</span></td>
+            </tr>
+            <tr>
+              <td>21</td><td>Côte-d'Or</td><td>85 – 115</td>
+              <td><span class="potentiel p-moyen">Moyen</span></td>
+            </tr>
+            <tr>
+              <td>08</td><td>Ardennes</td><td>40 – 55</td>
+              <td><span class="potentiel p-dev">À développer</span></td>
+            </tr>
+            <tr>
+              <td>55</td><td>Meuse</td><td>40 – 55</td>
+              <td><span class="potentiel p-dev">À développer</span></td>
+            </tr>
+            <tr>
+              <td>52</td><td>Haute-Marne</td><td>35 – 50</td>
+              <td><span class="potentiel p-dev">À développer</span></td>
+            </tr>
+            <tr>
+              <td>70</td><td>Haute-Saône</td><td>45 – 60</td>
+              <td><span class="potentiel p-dev">À développer</span></td>
+            </tr>
+            <tr>
+              <td>90</td><td>Territoire de Belfort</td><td>18 – 25</td>
+              <td><span class="potentiel p-dev">À développer</span></td>
+            </tr>
+            <tr>
+              <td colspan="2"><strong>Total territoire</strong></td>
+              <td><strong>~1 080 – 1 490</strong></td>
+              <td><span class="potentiel p-fort">Solide</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="territoire-text">
+        <h3>Stratégie d'entrée en 2 phases</h3>
+        <p><strong>Phase 1 — Les 4 départements denses</strong><br>
+        67, 68, 57 et 54 concentrent à eux seuls 600 à 820 installateurs potentiels. C'est le cœur industriel et urbain du Grand Est — les volumes sont là, la densité de prospection est optimale.</p>
+        <p><strong>Phase 2 — Extension progressive</strong><br>
+        Marne, Aube, Côte-d'Or et Vosges en relais de croissance. Des marchés moins denses mais avec des poches C&I et agricoles intéressantes, notamment en Champagne.</p>
+        <div class="highlight">
+          "Je ne prospecte pas en volume, je prospecte en pertinence. Identifier les installateurs actifs via les annuaires RGE, segmenter par volume d'activité, construire la relation dans la durée."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTHODE -->
+<section id="methode">
+  <div class="container">
+    <p class="section-label reveal">Posture commerciale</p>
+    <h2 class="section-title reveal">Préparer. Comprendre.<br>Convaincre.</h2>
+    <p class="section-lead reveal">Ma méthode de prospection repose sur une conviction simple : on n'appelle pas pour vendre, on appelle pour obtenir un rendez-vous. Et pour décrocher ce rendez-vous, il faut avoir fait ses devoirs avant.</p>
+
+    <div class="methode-steps reveal">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Préparer</h3>
+        <p>Avant chaque appel : identification de l'installateur via annuaire RGE, analyse de son activité, de sa zone géographique, de ses volumes probables. Le prospect ne doit pas se sentir un numéro dans une liste.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Comprendre</h3>
+        <p>Premier contact = écoute. Comprendre ses fournisseurs actuels, ses délais de livraison, ses manques. Ne pas proposer avant d'avoir compris. La confiance se construit dans les questions, pas dans le pitch.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Convaincre</h3>
+        <p>L'objectif d'un premier appel : obtenir un rendez-vous, pas une commande. Proposer un test sans engagement. Entrer dans le panel avant de devenir le fournisseur principal. Patience et ténacité.</p>
+      </div>
+    </div>
+
+    <div class="methode-phrase reveal">
+      <p>"Je ne prospecte pas en volume, je prospecte en <span>pertinence.</span><br>
+      300 appels pour 100 signatures — ce n'est pas de la chance, <span>c'est de la préparation.</span>"</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="container">
+    <p class="section-label reveal">Expériences</p>
+    <h2 class="section-title reveal">Un parcours qui construit<br>ce profil</h2>
+    <p class="section-lead reveal">15 ans d'expériences complémentaires — terrain technique, développement commercial, énergie solaire. Chaque étape renforce la suivante.</p>
+
+    <div class="parcours-grid">
+      <div class="exp-card reveal">
+        <div class="exp-card-header">
+          <h3>Attila<br>Franchise toiture</h3>
+          <span class="exp-badge">2020</span>
+        </div>
+        <div class="exp-card-body">
+          <p>Création et développement d'une agence franchise BtoB. Prospection à froid par téléphone auprès d'entreprises et d'artisans — sans réseau préexistant, sans portefeuille hérité.</p>
+          <div class="exp-result">
+            <span class="r">Résultat —</span>
+            <span class="v"> 300 prospects contactés, 100 signés. Taux de conversion 33%. Top tiers du classement national des agences de moins de 5 ans.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-card-header">
+          <h3>Secteur photovoltaïque<br>Expérience directe</h3>
+          <span class="exp-badge">PV</span>
+        </div>
+        <div class="exp-card-body">
+          <p>Expérience opérationnelle dans le secteur photovoltaïque — connaissance des produits, des chaînes de valeur, des contraintes terrain des installateurs et de la dynamique du marché résidentiel et C&I.</p>
+          <div class="exp-result">
+            <span class="r">Atout clé —</span>
+            <span class="v"> Interlocuteur crédible pour les installateurs dès le premier appel. Aucune courbe d'apprentissage produit.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-card-header">
+          <h3>Études & Grands Travaux<br>Infrastructure</h3>
+          <span class="exp-badge">15 ans</span>
+        </div>
+        <div class="exp-card-body">
+          <p>Parcours dans les études et grands travaux — environnement technique exigeant, coordination de projets complexes, interface avec des professionnels du bâtiment et des travaux publics.</p>
+          <div class="exp-result">
+            <span class="r">Transfert direct —</span>
+            <span class="v"> Rigueur, lecture des contraintes techniques, culture du chantier. Autant de points communs avec le quotidien des installateurs PV.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Candidature</p>
+    <h2 class="section-title">Disponible &amp; motivé<br>pour construire le Grand Est</h2>
+    <p class="section-lead">
+      Commercial BtoB — NED Nouvelle Énergie Distribution<br>
+      Territoire Grand Est · Basé Villers-lès-Nancy (54)
+    </p>
+    <div class="contact-links">
+      <a href="mailto:geraudmm@hotmail.com" class="contact-btn primary">✉ geraudmm@hotmail.com</a>
+      <a href="tel:+33673259363" class="contact-btn secondary">06 73 25 93 63</a>
+      <a href="GMorin_CV_LdM_2026.pdf" class="contact-btn secondary" download>↓ Télécharger le CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Géraud Morin — Villers-lès-Nancy (54) — Portfolio commercial 2026</p>
+  <p>Candidature <span class="footer-ned">NED Nouvelle Énergie Distribution</span> · Grand Est</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
